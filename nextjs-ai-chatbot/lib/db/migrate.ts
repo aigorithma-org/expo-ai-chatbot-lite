@@ -8,22 +8,22 @@ config({
 });
 
 const runMigrate = async () => {
-  // const postgresUrl = process.env.POSTGRES_URL;
+  const postgresUrl = process.env.POSTGRES_URL;
 
-  // if (!postgresUrl) {
-  //   throw new Error('POSTGRES_URL is not defined');
-  // }
+  if (!postgresUrl) {
+    throw new Error('POSTGRES_URL is not defined');
+  }
 
-  // const connection = postgres(postgresUrl, { max: 1 });
-  // const db = drizzle(connection);
+  const connection = postgres(postgresUrl, { max: 1 });
+  const db = drizzle(connection);
 
-  // console.log('⏳ Running migrations...');
+  console.log('⏳ Running migrations...');
 
-  // const start = Date.now();
-  // await migrate(db, { migrationsFolder: './lib/db/migrations' });
-  // const end = Date.now();
+  const start = Date.now();
+  await migrate(db, { migrationsFolder: './lib/db/migrations' });
+  const end = Date.now();
 
-  // console.log('✅ Migrations completed in', end - start, 'ms');
+  console.log('✅ Migrations completed in', end - start, 'ms');
   process.exit(0);
 };
 
